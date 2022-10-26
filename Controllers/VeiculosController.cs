@@ -51,16 +51,18 @@ namespace Estacionamento.Controllers
         // GET: VeiculosController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            return View(db.VEICULOS.Where (a=> a.Id==id).FirstOrDefault());
         }
 
         // POST: VeiculosController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, Veiculos collection)
         {
             try
             {
+                db.VEICULOS.Update(collection);
+                db.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -72,22 +74,9 @@ namespace Estacionamento.Controllers
         // GET: VeiculosController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
-        }
-
-        // POST: VeiculosController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            db.VEICULOS.Remove(db.VEICULOS.Where(a=> a.Id == id).FirstOrDefault ());
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
     }
 }
