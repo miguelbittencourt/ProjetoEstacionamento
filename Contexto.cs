@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Estacionamento.Entidades;
 
+
 namespace Estacionamento
 {
     public class Contexto : DbContext
@@ -12,5 +13,7 @@ namespace Estacionamento
         public Contexto(DbContextOptions<Contexto> options) : base(options) { }
         
         public DbSet<Usuarios> USUARIOS { get; set; }
+
+        public DbSet<Veiculos> VEICULOS { get; set; }
     }
 }
