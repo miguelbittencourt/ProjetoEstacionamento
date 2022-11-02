@@ -22,24 +22,34 @@ namespace Estacionamento.Controllers
         // GET: UsuariosController
         public ActionResult Index(string query, string tipoPesquisa)
         {
-            if (string.IsNullOrEmpty(query))
+            switch (tipoPesquisa)
             {
-                return View(db.USUARIOS.ToList());
+                case "Nome":
+                    return View(db.USUARIOS.Where(a => a.Nome.Contains(query)));
+                case "Login":
+                    return View(db.USUARIOS.Where(a => a.Login.Contains(query)));
+                default:
+                    return View(db.USUARIOS.ToList());
             }
-            else if(tipoPesquisa == "Todos")
-            {
-                return View(db.USUARIOS.Where(a => a.Login.Contains(query) || a.Nome.Contains(query) ));
-            }else if (tipoPesquisa == "Nome")
-            {
-                return View(db.USUARIOS.Where(a => a.Nome.Contains(query)));
-            }else if(tipoPesquisa == "Login")
-            {
-                return View(db.USUARIOS.Where(a => a.Login.Contains(query)));
-            }
-            else
-            {
-                return View(db.USUARIOS.ToList());
-            }
+
+            //if (string.IsNullOrEmpty(query))
+            //{
+            //    return View(db.USUARIOS.ToList());
+            //}
+            //else if(tipoPesquisa == "Todos")
+            //{
+            //    return View(db.USUARIOS.Where(a => a.Login.Contains(query) || a.Nome.Contains(query) ));
+            //}else if (tipoPesquisa == "Nome")
+            //{
+            //    return View(db.USUARIOS.Where(a => a.Nome.Contains(query)));
+            //}else if(tipoPesquisa == "Login")
+            //{
+            //    return View(db.USUARIOS.Where(a => a.Login.Contains(query)));
+            //}
+            //else
+            //{
+            //    return View(db.USUARIOS.ToList());
+            //}
             
         }
 
