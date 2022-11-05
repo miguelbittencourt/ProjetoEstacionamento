@@ -4,9 +4,7 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
-
-<h4>Veiculos</h4>
+<h1>Novo Veículo</h1>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -14,7 +12,10 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="TipoVeiculo" class="control-label"></label>
-                <input asp-for="TipoVeiculo" class="form-control" />
+                <select asp-for="TipoVeiculo" class="form-control">
+                    <option value="Carro">Carro</option>
+                    <option value="Moto">Moto</option>
+                </select>
                 <span asp-validation-for="TipoVeiculo" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -24,7 +25,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Marca" class="control-label"></label>
-                <select asp-for="Marca" classs="form-control">
+                <select asp-for="Marca" class="form-control">
                     <option value="Toyota">Toyota</option>
                     <option value="Volkswagen">Volkswagen</option>
                     <option value="Ford">Ford</option>
@@ -35,7 +36,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Cor" class="control-label"></label>
-                <select asp-for="Cor" classs="form-control">
+                <select asp-for="Cor" class="form-control">
                     <option value="Preto">Preto</option>
                     <option value="Branco">Branco</option>
                     <option value="Cinza">Cinza</option>
@@ -73,13 +74,15 @@
                 <input asp-for="Referencia" class="form-control" />
                 <span asp-validation-for="Referencia" class="text-danger"></span>
             </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Ativo" /> @Html.DisplayNameFor(model => model.Ativo)
-                </label>
+            <div class="form-group">
+                <label asp-for="Status" class="form-label"></label>
+                <select class="form-control" asp-for="Status">
+                    <option value="@true">Ativo</option>
+                    <option value="@false">Inativo</option>
+                </select>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Criar" class="btn btn-primary" />
             </div>
         </form>
     </div>

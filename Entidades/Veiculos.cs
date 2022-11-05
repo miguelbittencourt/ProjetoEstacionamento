@@ -18,11 +18,11 @@ namespace Estacionamento.Entidades
 
         public DateTime Chegada { get; set; }//hora de chegada a o estacionamento
 
-        public  DateTime Saida { get; set; } //saida do estacionamento
+        public DateTime Saida { get; set; } //saida do estacionamento
 
         public String Referencia { get; set; }//local do estacionamento
 
-        public Boolean Ativo { get; set; }
+        public Boolean Status { get; set; }
 
         //Entrada para cadastro (Veículo, Modelo, Marca, cor, placa, Dono, Contato, Contato, Chegada, Saída, Referência, ativo) 
     }
