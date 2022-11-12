@@ -1,18 +1,12 @@
 using Estacionamento.Infrastructure.Configuration;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using MySql.EntityFrameworkCore.Extensions;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Reflection;
 
 namespace Estacionamento
 {
@@ -30,11 +24,18 @@ namespace Estacionamento
         {
             services.AddControllersWithViews();
             services
-                .AddEntityFrameworkMySQL()
                 .AddDbContext<Contexto>(options =>
                     options.UseMySQL(Configuration.GetConnectionString(
-                        ApplicationConstants.Database.ApplicationConnectionParameterName)));
+                        ApplicationConstants.Database.ApplicationConnectionParameterName),
+                        MySQLOptionsAction: sqlOptions =>
+                        {
+                            sqlOptions.MigrationsHistoryTable(HistoryRepository.DefaultTableName, ApplicationConstants.Database.DefaultDatabaseSchema);
+                            sqlOptions.MigrationsAssembly(typeof(Contexto).GetTypeInfo().Assembly.GetName().Name);
+                            //Configuring Connection Resiliency: https://docs.microsoft.com/en-us/ef/core/miscellaneous/connection-resiliency 
+                        }));
         }
+
+        
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -51,9 +52,7 @@ namespace Estacionamento
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
             app.UseRouting();
-
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

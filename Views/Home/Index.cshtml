@@ -1,4 +1,6 @@
-﻿@{
+﻿@model IList<Estacionamento.Entidades.Vagas>
+
+@{
     ViewData["Title"] = "Inicio";
 }
 
@@ -6,4 +8,9 @@
     <h1 class="display-4">Estacionamento FATEC TQ </h1>
 </div>
 
-<img src="~/Fatec-Taquaritinga real.jpg" style="width: 100%"/>
+@foreach(var vaga in Model)
+{
+    <p>@Html.DisplayFor(modelItem => vaga.Sigla)</p>
+}
+
+
