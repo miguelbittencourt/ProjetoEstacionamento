@@ -8,13 +8,11 @@ namespace Estacionamento.Entidades
 {
     public class Usuarios
     {
+        public Usuarios() { }
+
         public int Id { get; set; }
-
-        public String Nome { get; set; }
-
-        public String Login { get; set; }
-
-        public String Senha { get; set; }
-
+        public string Nome { get; set; }
+        public string Login { get; set; }
+        public string Senha { get; set; }
     }
 }

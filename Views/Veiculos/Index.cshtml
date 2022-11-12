@@ -13,9 +13,6 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.TipoVeiculo)
             </th>
             <th>
@@ -25,13 +22,16 @@
                 @Html.DisplayNameFor(model => model.Marca)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.Modelo)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Cor)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Placa)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Dono)
+                @Html.DisplayNameFor(model => model.NomeProprietario)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Contato)
@@ -42,21 +42,12 @@
             <th>
                 @Html.DisplayNameFor(model => model.Saida)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Referencia)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Status)
-            </th>
             <th>Ações</th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.TipoVeiculo)
             </td>
@@ -67,13 +58,16 @@
                 @Html.DisplayFor(modelItem => item.Marca)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.Modelo)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Cor)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Placa)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Dono)
+                @Html.DisplayFor(modelItem => item.NomeProprietario)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Contato)
@@ -84,16 +78,16 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Saida)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Referencia)
-            </td>
-            <td>
+            @*<td>
                 @if (item.Status == true)
                 {
                     <p>Ativo</p>
                 }
-                else{ <p>Inativo</p> }
-            </td>
+                else
+                {
+                    <p>Inativo</p>
+                }
+            </td>*@
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary mb-1">Editar</a>
                 <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-secondary mb-1">Detalhes</a>

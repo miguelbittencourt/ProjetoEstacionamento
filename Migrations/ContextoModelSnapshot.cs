@@ -15,7 +15,7 @@ namespace Estacionamento.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 64)
-                .HasAnnotation("ProductVersion", "5.0.15");
+                .HasAnnotation("ProductVersion", "5.0.17");
 
             modelBuilder.Entity("Estacionamento.Entidades.Usuarios", b =>
                 {
@@ -37,6 +37,28 @@ namespace Estacionamento.Migrations
                     b.ToTable("USUARIOS");
                 });
 
+            modelBuilder.Entity("Estacionamento.Entidades.Vagas", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Sigla")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Status")
+                        .HasColumnType("text");
+
+                    b.Property<int?>("veiculoId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("veiculoId");
+
+                    b.ToTable("VAGAS");
+                });
+
             modelBuilder.Entity("Estacionamento.Entidades.Veiculos", b =>
                 {
                     b.Property<int>("Id")
@@ -52,10 +74,13 @@ namespace Estacionamento.Migrations
                     b.Property<string>("Cor")
                         .HasColumnType("text");
 
-                    b.Property<string>("Dono")
+                    b.Property<string>("Marca")
                         .HasColumnType("text");
 
-                    b.Property<string>("Marca")
+                    b.Property<string>("Modelo")
+                        .HasColumnType("text");
+
+                    b.Property<string>("NomeProprietario")
                         .HasColumnType("text");
 
                     b.Property<string>("Observacao")
@@ -64,14 +89,8 @@ namespace Estacionamento.Migrations
                     b.Property<string>("Placa")
                         .HasColumnType("text");
 
-                    b.Property<string>("Referencia")
-                        .HasColumnType("text");
-
                     b.Property<DateTime>("Saida")
                         .HasColumnType("datetime");
-
-                    b.Property<bool>("Status")
-                        .HasColumnType("tinyint(1)");
 
                     b.Property<string>("TipoVeiculo")
                         .HasColumnType("text");
@@ -79,6 +98,15 @@ namespace Estacionamento.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("VEICULOS");
+                });
+
+            modelBuilder.Entity("Estacionamento.Entidades.Vagas", b =>
+                {
+                    b.HasOne("Estacionamento.Entidades.Veiculos", "veiculo")
+                        .WithMany()
+                        .HasForeignKey("veiculoId");
+
+                    b.Navigation("veiculo");
                 });
 #pragma warning restore 612, 618
         }
