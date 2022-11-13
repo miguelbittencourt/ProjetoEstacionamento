@@ -2,3 +2,17 @@
 // for details on configuring this project to bundle and minify static web assets.
 
 // Write your JavaScript code.
+
+$(document).ready(function () {
+    $('.botaoVaga').click(function () {
+        var vagaId = $(this).attr('vagaId');
+        $.ajax({
+            type: 'GET',
+            url: "/Vagas/Edit/" + vagaId,
+            success: function (result) {
+                $("#listaVagas").html(result);
+                $('#modalEditVagas').modal();
+            }
+        });
+    })
+})

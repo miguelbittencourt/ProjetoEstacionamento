@@ -26,13 +26,7 @@ namespace Estacionamento
             services
                 .AddDbContext<Contexto>(options =>
                     options.UseMySQL(Configuration.GetConnectionString(
-                        ApplicationConstants.Database.ApplicationConnectionParameterName),
-                        MySQLOptionsAction: sqlOptions =>
-                        {
-                            sqlOptions.MigrationsHistoryTable(HistoryRepository.DefaultTableName, ApplicationConstants.Database.DefaultDatabaseSchema);
-                            sqlOptions.MigrationsAssembly(typeof(Contexto).GetTypeInfo().Assembly.GetName().Name);
-                            //Configuring Connection Resiliency: https://docs.microsoft.com/en-us/ef/core/miscellaneous/connection-resiliency 
-                        }));
+                        ApplicationConstants.Database.ApplicationConnectionParameterName)));
         }
 
         

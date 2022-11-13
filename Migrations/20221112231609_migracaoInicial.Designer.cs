@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Estacionamento.Migrations
 {
     [DbContext(typeof(Contexto))]
-    [Migration("20221112221505_uppercaseNoCampoVeiculo")]
-    partial class uppercaseNoCampoVeiculo
+    [Migration("20221112231609_migracaoInicial")]
+    partial class migracaoInicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

@@ -4,7 +4,7 @@ using MySql.EntityFrameworkCore.Metadata;
 
 namespace Estacionamento.Migrations
 {
-    public partial class MigracaoInicial : Migration
+    public partial class migracaoInicial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -52,24 +52,24 @@ namespace Estacionamento.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
                     Sigla = table.Column<string>(type: "text", nullable: true),
-                    veiculoId = table.Column<int>(type: "int", nullable: true),
+                    VeiculoId = table.Column<int>(type: "int", nullable: true),
                     Status = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_VAGAS", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_VAGAS_VEICULOS_veiculoId",
-                        column: x => x.veiculoId,
+                        name: "FK_VAGAS_VEICULOS_VeiculoId",
+                        column: x => x.VeiculoId,
                         principalTable: "VEICULOS",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_VAGAS_veiculoId",
+                name: "IX_VAGAS_VeiculoId",
                 table: "VAGAS",
-                column: "veiculoId");
+                column: "VeiculoId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

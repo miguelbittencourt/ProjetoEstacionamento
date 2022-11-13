@@ -1,4 +1,5 @@
-﻿using Estacionamento.Models;
+﻿using Estacionamento.Entidades;
+using Estacionamento.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -11,16 +12,19 @@ namespace Estacionamento.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly Contexto db;
+
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, Contexto contexto)
         {
             _logger = logger;
+            db = contexto;
         }
 
         public IActionResult Index()
         {
-            return View();
+            return View(db.VAGAS.ToList());
         }
 
         public IActionResult Privacy()
