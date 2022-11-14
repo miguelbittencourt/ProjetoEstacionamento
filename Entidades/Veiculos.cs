@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Estacionamento.Entidades
 {
@@ -6,6 +7,7 @@ namespace Estacionamento.Entidades
     {
         public Veiculos() { }
 
+        [Key()]
         public int Id { get; set; }
         public string TipoVeiculo { get; set; }//carro ou moto
         public string Observacao { get; set; }// referencia do carro ou dono

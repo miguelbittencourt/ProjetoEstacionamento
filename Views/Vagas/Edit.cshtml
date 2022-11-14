@@ -1,0 +1,23 @@
+﻿@model Estacionamento.Entidades.VagaVeiculoViewModel
+
+@{
+    ViewData["Title"] = "_EditVagas";
+}
+
+<div>
+    <p>Sigla da Vaga: @Model.Vagas.Sigla</p>
+    <p>Status da Vaga: @Model.Vagas.Status</p>
+</div>
+<div>
+    @if (Model.Veiculo != null)
+    {
+        <p>Marca: @Model.Veiculo.Marca</p>
+        <p>Modelo: @Model.Veiculo.Modelo</p>
+        <p>Placa: @Model.Veiculo.Placa</p>
+        <p>Nome do Proprietário: @Model.Veiculo.NomeProprietario</p>
+    }
+</div>
+
+
+
+

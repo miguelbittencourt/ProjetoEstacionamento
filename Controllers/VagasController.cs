@@ -16,42 +16,46 @@ namespace Estacionamento.Controllers
 
 
         // GET: VagasController
+        [HttpGet]
         public ActionResult Index()
         {
-            return RedirectToAction("Index", "Home");
+            return View(db.VAGAS.ToList());
         }
 
-        // GET: VagasController/Details/5
-        //public ActionResult Details(int id)
+        // GET: VagasController/Create
+        //public ActionResult Create()
         //{
         //    return View();
         //}
 
-        // GET: VagasController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
         // POST: VagasController/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Create(IFormCollection collection)
+        //{
+        //    try
+        //    {
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    catch
+        //    {
+        //        return View();
+        //    }
+        //}
 
         // GET: VagasController/Edit/5
+        [HttpGet]
         public ActionResult Edit(int id)
         {
-            return PartialView("_EditVagas",db.VAGAS.Where(a => a.Id == id).FirstOrDefault());
+            VagaVeiculoViewModel vagaVeiculoViewModel = new VagaVeiculoViewModel();
+            Vagas vagas = db.VAGAS.Where(v => v.Id == id).FirstOrDefault();
+            if (vagas.VeiculoId != null)
+            {
+                Veiculos veiculo = db.VEICULOS.Where(v => v.Id == vagas.VeiculoId).FirstOrDefault();
+                vagaVeiculoViewModel.Veiculo = veiculo;
+            }
+            vagaVeiculoViewModel.Vagas = vagas;
+            return PartialView(vagaVeiculoViewModel);
         }
 
         // POST: VagasController/Edit/5
@@ -70,24 +74,24 @@ namespace Estacionamento.Controllers
         }
 
         // GET: VagasController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
+        //public ActionResult Delete(int id)
+        //{
+        //    return View();
+        //}
 
         // POST: VagasController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Delete(int id, IFormCollection collection)
+        //{
+        //    try
+        //    {
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    catch
+        //    {
+        //        return View();
+        //    }
+        //}
     }
 }

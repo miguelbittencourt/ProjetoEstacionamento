@@ -24,7 +24,7 @@ namespace Estacionamento.Controllers
 
         public IActionResult Index()
         {
-            return View(db.VAGAS.ToList());
+            return RedirectToAction("Index", "Vagas");
         }
 
         public IActionResult Privacy()
