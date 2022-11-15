@@ -5,9 +5,14 @@
 
 <style>
     .botaoVaga {
-        height: 10rem;
-        width: 5rem;
-        margin-bottom: 3rem;
+        height: 6rem;
+        width: 3rem;
+        margin: 0, 1rem, 5rem , 1rem;
+    }
+
+    .divVagas {
+        text-align: center;
+        margin: auto;
     }
 </style>
 
@@ -19,49 +24,47 @@
     string corBotao;
 }
 
-@foreach (var vaga in Model)
-{
-    if (vaga.Status == "Ocupado")
+<div class="divVagas">
+    @foreach (var vaga in Model)
     {
-        corBotao = "#FFD700";
+        if (vaga.Status == "Ocupado")
+        {
+            corBotao = "#FFD700";
+        }
+        else { corBotao = "cornflowerblue"; }
+        if (vaga.Sigla.StartsWith('A'))
+        {
+            <button type="button" href="javascript:" vagaId="@vaga.Id" class="botaoVaga" style="background-color: @corBotao">@vaga.Sigla</button>
+        }
     }
-    else { corBotao = "cornflowerblue"; }
-    if (vaga.Sigla.StartsWith('A'))
+</div>
+    <br>
+<div class="divVagas">
+    @foreach (var vaga in Model)
     {
-        <button type="button" href="javascript:" vagaId="@vaga.Id" class="botaoVaga" style="background-color: @corBotao">@vaga.Sigla</button>
+        if (vaga.Status == "Ocupado")
+        {
+            corBotao = "#FFD700";
+        }
+        else { corBotao = "cornflowerblue"; }
+        if (vaga.Sigla.StartsWith('B'))
+        {
+            <button type="button" href="javascript:" vagaId="@vaga.Id" class="botaoVaga" style="background-color: @corBotao">@vaga.Sigla</button>
+        }
     }
-}
-<br>
-@foreach (var vaga in Model)
-{
-    if (vaga.Status == "Ocupado")
-    {
-        corBotao = "#FFD700";
-    }
-    else { corBotao = "cornflowerblue"; }
-    Console.WriteLine(vaga.Id);
-    if (vaga.Sigla.StartsWith('B'))
-    {
-        <button type="button" href="javascript:" vagaId="@vaga.Id" class="botaoVaga" style="background-color: @corBotao">@vaga.Sigla</button>
-    }
-}
+</div>
 
 <div id="modalEditVagas" class="modal" tabindex="-1">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Modal title</h5>
+                <h5 class="modal-title">Editar Vaga</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times</span>
                 </button>
             </div>
             <div class="modal-body">
-                <p>Edição de Vagas</p>
                 <div id="listaVagas"></div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
             </div>
         </div>
     </div>

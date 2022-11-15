@@ -3,14 +3,16 @@ using System;
 using Estacionamento;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Estacionamento.Migrations
 {
     [DbContext(typeof(Contexto))]
-    partial class ContextoModelSnapshot : ModelSnapshot
+    [Migration("20221114202552_mudancaChegadaeSaidaParaVagas")]
+    partial class mudancaChegadaeSaidaParaVagas
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -43,10 +45,10 @@ namespace Estacionamento.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("Chegada")
+                    b.Property<DateTime>("Chegada")
                         .HasColumnType("datetime");
 
-                    b.Property<DateTime?>("Saida")
+                    b.Property<DateTime>("Saida")
                         .HasColumnType("datetime");
 
                     b.Property<string>("Sigla")

@@ -36,12 +36,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.Contato)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Chegada)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Saida)
-            </th>
             <th>Ações</th>
         </tr>
     </thead>
@@ -73,24 +67,7 @@
                 @Html.DisplayFor(modelItem => item.Contato)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Chegada)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Saida)
-            </td>
-            @*<td>
-                @if (item.Status == true)
-                {
-                    <p>Ativo</p>
-                }
-                else
-                {
-                    <p>Inativo</p>
-                }
-            </td>*@
-            <td>
                 <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary mb-1">Editar</a>
-                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-secondary mb-1">Detalhes</a>
                 <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger mb-1">Excluir</a>
             </td>
         </tr>

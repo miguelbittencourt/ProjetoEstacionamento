@@ -19,12 +19,6 @@ namespace Estacionamento.Controllers
             return View(db.VEICULOS.ToList());
         }
 
-        // GET: VeiculosController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
         // GET: VeiculosController/Create
         public ActionResult Create()
         {
@@ -51,7 +45,7 @@ namespace Estacionamento.Controllers
         // GET: VeiculosController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View(db.VEICULOS.Where (a=> a.Id==id).FirstOrDefault());
+            return View(db.VEICULOS.Where(a => a.Id == id).FirstOrDefault());
         }
 
         // POST: VeiculosController/Edit/5

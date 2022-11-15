@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Estacionamento.Entidades;
 using System.Linq;
+using System;
+using System.Collections.Generic;
 
 namespace Estacionamento.Controllers
 {
@@ -22,76 +24,58 @@ namespace Estacionamento.Controllers
             return View(db.VAGAS.ToList());
         }
 
-        // GET: VagasController/Create
-        //public ActionResult Create()
-        //{
-        //    return View();
-        //}
-
-        // POST: VagasController/Create
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Create(IFormCollection collection)
-        //{
-        //    try
-        //    {
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    catch
-        //    {
-        //        return View();
-        //    }
-        //}
-
         // GET: VagasController/Edit/5
         [HttpGet]
         public ActionResult Edit(int id)
         {
             VagaVeiculoViewModel vagaVeiculoViewModel = new VagaVeiculoViewModel();
-            Vagas vagas = db.VAGAS.Where(v => v.Id == id).FirstOrDefault();
-            if (vagas.VeiculoId != null)
-            {
-                Veiculos veiculo = db.VEICULOS.Where(v => v.Id == vagas.VeiculoId).FirstOrDefault();
-                vagaVeiculoViewModel.Veiculo = veiculo;
-            }
-            vagaVeiculoViewModel.Vagas = vagas;
+            Vagas vaga = db.VAGAS.Where(v => v.Id == id).FirstOrDefault();
+            List<Veiculos> veiculos = db.VEICULOS.ToList();
+            vagaVeiculoViewModel.Veiculos = veiculos;
+            vagaVeiculoViewModel.Vaga = vaga;
             return PartialView(vagaVeiculoViewModel);
         }
 
         // POST: VagasController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult CheckIn(VagaVeiculoViewModel collection)
         {
+            collection.Vaga.Veiculo = db.VEICULOS.Where(veiculo => veiculo.Id == collection.Vaga.VeiculoId).FirstOrDefault();
+            collection.Vaga.Status = "Ocupado";
+            Vagas filteredCollection = collection.Vaga;
             try
             {
+                db.VAGAS.Update(filteredCollection);
+                db.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
-                return View();
+                return RedirectToAction(nameof(Index));
             }
         }
 
-        // GET: VagasController/Delete/5
-        //public ActionResult Delete(int id)
-        //{
-        //    return View();
-        //}
-
-        // POST: VagasController/Delete/5
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Delete(int id, IFormCollection collection)
-        //{
-        //    try
-        //    {
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    catch
-        //    {
-        //        return View();
-        //    }
-        //}
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CheckOut(VagaVeiculoViewModel collection)
+        {
+            Vagas vagaAtualizada = db.VAGAS.Where(a => a.Id == collection.Vaga.Id).FirstOrDefault();
+            vagaAtualizada.Chegada = null;
+            vagaAtualizada.Saida = null;
+            vagaAtualizada.VeiculoId = null;
+            vagaAtualizada.Veiculo = null;
+            vagaAtualizada.Status = "Livre";
+            try
+            {
+                db.VAGAS.Update(vagaAtualizada);
+                db.SaveChanges();
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return RedirectToAction(nameof(Index));
+            }
+        }
     }
 }

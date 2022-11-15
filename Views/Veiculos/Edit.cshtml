@@ -63,23 +63,6 @@
                 <span asp-validation-for="Contato" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Chegada" class="control-label"></label>
-                <input asp-for="Chegada" class="form-control" />
-                <span asp-validation-for="Chegada" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Saida" class="control-label"></label>
-                <input asp-for="Saida" class="form-control" />
-                <span asp-validation-for="Saida" class="text-danger"></span>
-            </div>
-            @*<div class="form-group">
-                <label asp-for="Status" class="form-control-label"></label>
-                <select asp-for="Status" class="form-control">
-                    <option value="@true">Ativo</option>
-                    <option value="@false">Inativo</option>
-                </select>
-            </div>*@
-            <div class="form-group">
                 <input type="submit" value="Salvar" class="btn btn-primary" />
             </div>
         </form>
@@ -87,7 +70,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Voltar para a lista</a>
+    <a class="btn btn-secondary" asp-action="Index">Voltar para a lista</a>
 </div>
 
 @section Scripts {

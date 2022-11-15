@@ -1,10 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Estacionamento.Entidades
 {
     public class VagaVeiculoViewModel
     {
-        public Vagas Vagas { get; set; }
-        public Veiculos? Veiculo { get; set; }
+        public Vagas Vaga { get; set; }
+        public List<Veiculos>? Veiculos { get; set; }
     }
 }
