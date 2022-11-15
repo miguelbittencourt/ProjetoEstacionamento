@@ -8,7 +8,6 @@ namespace Estacionamento.Controllers
     public class VeiculosController : Controller
     {
         private readonly Contexto db;
-
         public VeiculosController(Contexto contexto)
         {
             db = contexto;

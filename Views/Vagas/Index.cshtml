@@ -20,18 +20,15 @@
     <h1 class="display-4">Estacionamento FATEC TQ </h1>
 </div>
 
-@{
-    string corBotao;
-}
+@{string corBotao;}
 
 <div class="divVagas">
     @foreach (var vaga in Model)
     {
         if (vaga.Status == "Ocupado")
-        {
             corBotao = "#FFD700";
-        }
-        else { corBotao = "cornflowerblue"; }
+        else corBotao = "cornflowerblue";
+
         if (vaga.Sigla.StartsWith('A'))
         {
             <button type="button" href="javascript:" vagaId="@vaga.Id" class="botaoVaga" style="background-color: @corBotao">@vaga.Sigla</button>
@@ -43,10 +40,9 @@
     @foreach (var vaga in Model)
     {
         if (vaga.Status == "Ocupado")
-        {
-            corBotao = "#FFD700";
-        }
-        else { corBotao = "cornflowerblue"; }
+         corBotao = "#FFD700";
+        else corBotao = "cornflowerblue";
+
         if (vaga.Sigla.StartsWith('B'))
         {
             <button type="button" href="javascript:" vagaId="@vaga.Id" class="botaoVaga" style="background-color: @corBotao">@vaga.Sigla</button>

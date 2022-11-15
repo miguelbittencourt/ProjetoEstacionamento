@@ -7,41 +7,39 @@
 <h1>Novo Veículo</h1>
 <hr />
 <div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="TipoVeiculo" class="control-label"></label>
+    <form asp-action="Create">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div style="display: flex; justify-content: space-between;">
+            <div class="form-group" style="margin-right: 2rem">
+                <label asp-for="TipoVeiculo" class="control-label">Tipo do Veículo</label>
                 <select asp-for="TipoVeiculo" class="form-control">
+                    <option value="@null">Selecione...</option>
                     <option value="Carro">Carro</option>
                     <option value="Moto">Moto</option>
                 </select>
                 <span asp-validation-for="TipoVeiculo" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Observacao" class="control-label"></label>
+            <div class="form-group" style="margin-right: 2rem; width: 20rem;">
+                <label asp-for="Observacao" class="control-label">Observação</label>
                 <input asp-for="Observacao" class="form-control" />
                 <span asp-validation-for="Observacao" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group" style="margin-right: 2rem">
                 <label asp-for="Marca" class="control-label"></label>
-                <select asp-for="Marca" class="form-control">
-                    <option value="Toyota">Toyota</option>
-                    <option value="Volkswagen">Volkswagen</option>
-                    <option value="Ford">Ford</option>
-                    <option value="Honda">Honda</option>
-                    <option value="Outro">Outro</option>
-                </select>
+                <input asp-for="Marca" class="form-control" />
                 <span asp-validation-for="Marca" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group" style="margin-right: 2rem">
                 <label asp-for="Modelo" class="control-label"></label>
                 <input asp-for="Modelo" class="form-control" />
                 <span asp-validation-for="Modelo" class="text-danger"></span>
             </div>
-            <div class="form-group">
+        </div>
+        <div style="display: flex; justify-content: space-between;">
+            <div class="form-group" style="margin-right: 2rem">
                 <label asp-for="Cor" class="control-label"></label>
                 <select asp-for="Cor" class="form-control">
+                    <option value="@null">Selecione...</option>
                     <option value="Preto">Preto</option>
                     <option value="Branco">Branco</option>
                     <option value="Cinza">Cinza</option>
@@ -49,30 +47,27 @@
                 </select>
                 <span asp-validation-for="Cor" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group" style="margin-right: 2rem">
                 <label asp-for="Placa" class="control-label"></label>
                 <input asp-for="Placa" class="form-control" />
                 <span asp-validation-for="Placa" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="NomeProprietario" class="control-label"></label>
+            <div class="form-group" style="margin-right: 2rem; width: 20rem;">
+                <label asp-for="NomeProprietario" class="control-label">Nome do Proprietário</label>
                 <input asp-for="NomeProprietario" class="form-control" />
                 <span asp-validation-for="NomeProprietario" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group" style="margin-right: 2rem">
                 <label asp-for="Contato" class="control-label"></label>
                 <input asp-for="Contato" class="form-control" />
                 <span asp-validation-for="Contato" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Criar" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
+        </div>
+        <div class="form-group" style="margin-top: 2rem;">
+            <input type="submit" value="Salvar" class="btn btn-primary" />
+            <a asp-action="Index" class="btn btn-secondary">Voltar</a>
+        </div>
+    </form>
 </div>
 
 @section Scripts {
