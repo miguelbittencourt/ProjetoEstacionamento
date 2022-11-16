@@ -6,9 +6,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Estacionamento.Entidades;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Estacionamento.Controllers
 {
+    [Authorize(AuthenticationSchemes = "CookieAuthentication")]
     public class UsuariosController : Controller
     {
         private readonly Contexto db;
@@ -35,10 +37,16 @@ namespace Estacionamento.Controllers
             }
         }
 
-        // GET: UsuariosController/Details/5
-        public ActionResult Details(int id)
+        public ActionResult RemoverFiltros()
         {
-            return View();
+            return RedirectToAction("Index", "Usuarios");
+        }
+
+        public ActionResult Delete(int id)
+        {
+            db.USUARIOS.Remove(db.USUARIOS.Where(a => a.Id == id).FirstOrDefault());
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         // GET: UsuariosController/Create
@@ -86,14 +94,5 @@ namespace Estacionamento.Controllers
                 return View();
             }
         }
-
-        public ActionResult Delete(int id)
-        {
-            db.USUARIOS.Remove(db.USUARIOS.Where(a => a.Id == id).FirstOrDefault());
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
-
     }
 }

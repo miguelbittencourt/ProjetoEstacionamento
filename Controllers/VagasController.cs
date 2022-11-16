@@ -4,9 +4,11 @@ using Estacionamento.Entidades;
 using System.Linq;
 using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Estacionamento.Controllers
 {
+    [Authorize(AuthenticationSchemes = "CookieAuthentication")]
     public class VagasController : Controller
     {
         private readonly Contexto db;

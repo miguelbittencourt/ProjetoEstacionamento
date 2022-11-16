@@ -1,10 +1,12 @@
 ﻿using Estacionamento.Entidades;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 
 namespace Estacionamento.Controllers
 {
+    [Authorize(AuthenticationSchemes = "CookieAuthentication")]
     public class VeiculosController : Controller
     {
         private readonly Contexto db;
@@ -16,29 +18,6 @@ namespace Estacionamento.Controllers
         public ActionResult Index()
         {
             return View(db.VEICULOS.ToList());
-        }
-
-        // GET: VeiculosController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: VeiculosController/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(Veiculos collection)
-        {
-            try
-            {
-                db.VEICULOS.Add(collection);
-                db.SaveChanges();
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
         }
 
         // GET: VeiculosController/Edit/5
@@ -70,6 +49,29 @@ namespace Estacionamento.Controllers
             db.VEICULOS.Remove(db.VEICULOS.Where(a=> a.Id == id).FirstOrDefault ());
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        // GET: VeiculosController/Create
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        // POST: VeiculosController/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(Veiculos collection)
+        {
+            try
+            {
+                db.VEICULOS.Add(collection);
+                db.SaveChanges();
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
         }
     }
 }

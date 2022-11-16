@@ -27,6 +27,11 @@ namespace Estacionamento
                 .AddDbContext<Contexto>(options =>
                     options.UseMySQL(Configuration.GetConnectionString(
                         ApplicationConstants.Database.ApplicationConnectionParameterName)));
+            services.AddAuthentication("CookieAuthentication").AddCookie("CookieAuthentication", option =>
+            {
+                option.LoginPath = "/Login/Index";
+                option.AccessDeniedPath = "/Login/Index";
+            });
         }
 
         
@@ -47,13 +52,15 @@ namespace Estacionamento
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseRouting();
+            
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Vagas}/{action=Index}/{id?}");
             });
         }
     }

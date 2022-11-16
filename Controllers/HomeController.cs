@@ -1,5 +1,6 @@
 ﻿using Estacionamento.Entidades;
 using Estacionamento.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace Estacionamento.Controllers
 {
+    [Authorize(AuthenticationSchemes = "CookieAuthentication")]
     public class HomeController : Controller
     {
         private readonly Contexto db;
