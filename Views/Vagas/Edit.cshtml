@@ -1,0 +1,65 @@
+﻿@model Estacionamento.Entidades.VagaVeiculoViewModel
+
+@{
+    ViewData["Title"] = "_EditVagas";
+}
+
+<div>
+    <p>Sigla: @Model.Vaga.Sigla</p>
+    <p>Status: @Model.Vaga.Status</p>
+</div>
+
+@if (Model.Vaga.VeiculoId == null)
+{
+    <form asp-action="CheckIn">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="Vaga.Id" />
+        <input type="hidden" asp-for="Vaga.Sigla" />
+        <div class="form-group">
+            <label asp-for="Vaga.VeiculoId" class="control-label">Selecione o veículo para a vaga</label>
+            <select asp-for="Vaga.VeiculoId" class="form-control">
+                <option value="@null">Selecione...</option>
+                @foreach(var veiculo in Model.Veiculos)
+                {
+                    <option value="@veiculo.Id">Veiculo: @veiculo.Marca @veiculo.Modelo Dono: @veiculo.NomeProprietario</option>
+                }
+            </select>
+            <span asp-validation-for="Vaga.VeiculoId" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Vaga.Chegada" class="control-label"></label>
+            <input asp-for="Vaga.Chegada" class="form-control" />
+            <span asp-validation-for="Vaga.Chegada" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Vaga.Saida" class="control-label"></label>
+            <input asp-for="Vaga.Saida" class="form-control" />
+            <span asp-validation-for="Vaga.Saida" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Salvar" class="btn btn-primary" />
+        </div>
+    </form>
+}
+
+<div>
+    @if (Model.Vaga.VeiculoId != null)
+    {
+        <p>Marca: @Model.Veiculos.Where(a => a.Id == Model.Vaga.VeiculoId).FirstOrDefault().Marca</p>
+        <p>Modelo: @Model.Veiculos.Where(a => a.Id == Model.Vaga.VeiculoId).FirstOrDefault().Modelo</p>
+        <p>Placa: @Model.Veiculos.Where(a => a.Id == Model.Vaga.VeiculoId).FirstOrDefault().Placa</p>
+        <p>Nome do Proprietário: @Model.Veiculos.Where(a => a.Id == Model.Vaga.VeiculoId).FirstOrDefault().NomeProprietario</p>
+        <p>Chegada: @Model.Vaga.Chegada</p>
+        <p>Saída prevista: @Model.Vaga.Saida</p>
+
+        <form asp-action="CheckOut">
+            <input type="hidden" asp-for="Vaga.Id" />
+            <div class="form-group"><input type="submit" value="Fazer Checkout" class="btn btn-warning" /></div>
+        </form>
+    }
+</div>
+
+
+
+

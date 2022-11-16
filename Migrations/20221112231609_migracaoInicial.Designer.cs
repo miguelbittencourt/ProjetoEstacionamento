@@ -3,14 +3,16 @@ using System;
 using Estacionamento;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Estacionamento.Migrations
 {
     [DbContext(typeof(Contexto))]
-    partial class ContextoModelSnapshot : ModelSnapshot
+    [Migration("20221112231609_migracaoInicial")]
+    partial class migracaoInicial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -43,12 +45,6 @@ namespace Estacionamento.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("Chegada")
-                        .HasColumnType("datetime");
-
-                    b.Property<DateTime?>("Saida")
-                        .HasColumnType("datetime");
-
                     b.Property<string>("Sigla")
                         .HasColumnType("text");
 
@@ -71,6 +67,9 @@ namespace Estacionamento.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("Chegada")
+                        .HasColumnType("datetime");
+
                     b.Property<string>("Contato")
                         .HasColumnType("text");
 
@@ -91,6 +90,9 @@ namespace Estacionamento.Migrations
 
                     b.Property<string>("Placa")
                         .HasColumnType("text");
+
+                    b.Property<DateTime>("Saida")
+                        .HasColumnType("datetime");
 
                     b.Property<string>("TipoVeiculo")
                         .HasColumnType("text");

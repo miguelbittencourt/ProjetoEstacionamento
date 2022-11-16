@@ -1,101 +1,42 @@
 ﻿@model IEnumerable<Estacionamento.Entidades.Veiculos>
 
-@{
-    ViewData["Title"] = "Index";
-}
+@{ViewData["Title"] = "Index";}
 
-<h1>Index</h1>
+<h1>Veículos</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<p><a asp-action="Create" class="btn btn-success">Novo Veículo</a></p>
+
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TipoVeiculo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Observacao)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Marca)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Cor)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Placa)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Dono)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Contato)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Chegada)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Saida)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Referencia)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Ativo)
-            </th>
-            <th></th>
+            <th>Tipo</th>
+            <th>Observação</th>
+            <th>Marca</th>
+            <th>Modelo</th>
+            <th>Cor</th>
+            <th>Placa</th>
+            <th>Nome do Proprietário</th>
+            <th>Contato</th>
+            <th>Ações</th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+    @foreach (var item in Model) 
+    {
         <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Id)
-                </td>
+            <td>@Html.DisplayFor(modelItem => item.TipoVeiculo)</td>
+            <td>@Html.DisplayFor(modelItem => item.Observacao)</td>
+            <td>@Html.DisplayFor(modelItem => item.Marca)</td>
+            <td>@Html.DisplayFor(modelItem => item.Modelo)</td>
+            <td>@Html.DisplayFor(modelItem => item.Cor)</td>
+            <td>@Html.DisplayFor(modelItem => item.Placa)</td>
+            <td>@Html.DisplayFor(modelItem => item.NomeProprietario)</td>
+            <td>@Html.DisplayFor(modelItem => item.Contato)</td>
             <td>
-                @Html.DisplayFor(modelItem => item.TipoVeiculo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Observacao)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Marca)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Cor)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Placa)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Dono)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Contato)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Chegada)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Saida)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Referencia)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Ativo)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary mb-1">Editar</a>
+                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger mb-1">Excluir</a>
             </td>
         </tr>
-}
+    }
     </tbody>
 </table>

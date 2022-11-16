@@ -1,71 +1,57 @@
 ﻿@model IEnumerable<Estacionamento.Entidades.Usuarios>
 
-@{
-    ViewData["Title"] = "Index";
-}
+@{ViewData["Title"] = "Index";}
 
 <div class="card">
-    <div class="card-header"> Pesquisar Usuários</div>
+    <div class="card-header">Pesquisar Usuários</div>
     <div class="card-body">
        <form action="/Usuarios/Index" method="get">
-        <div class="row">
-            <div class="col-2">
-                <a href="/Usuarios/Create" class="btn btn-success">
-                    Novo Usuario
-                </a>
+           <div class="row">
+                <div class="col-2">
+                    <a href="/Usuarios/Create" class="btn btn-success">Novo Usuário</a>
                 </div>
                 <div class="col-2">
-                    <select name="tipoPesquisa" classs="form-control">
+                    <select name="tipoPesquisa" class="form-control">
                         <option value="Todos">Todos</option>
                         <option value="Nome">Nome</option>
                         <option value="Login">Login</option>
-
                     </select>
                 </div>
-            <div class="col-4">
-                <input type="text" name="query" class="form-control" placeholder="Digite a sua Busca"/>
+                <div class="col-4">
+                    <input type="text" name="query" class="form-control" placeholder="Digite a sua Busca"/>
                 </div>
-            <div class="col-4">
-                <button class="btn btn-primary "type="submit">Localizar</button>
-            </div>
-        </div>
-        </form>
+                <div class="col-2">
+                    <button class="btn btn-primary" type="submit">Localizar</button>
+                </div>
+                <div class="col-2">
+                    <a class="btn btn-secondary" asp-action="RemoverFiltros">Remover filtros</a>
+                </div>
+           </div>
+       </form>
     </div>
 </div>
 
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Nome)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Login)
-            </th>
-            <th></th>
+            <th>@Html.DisplayNameFor(model => model.Id)</th>
+            <th>@Html.DisplayNameFor(model => model.Nome)</th>
+            <th>@Html.DisplayNameFor(model => model.Login)</th>
+            <th>Ações</th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Id)</td>
+                <td>@Html.DisplayFor(modelItem => item.Nome)</td>
+                <td>@Html.DisplayFor(modelItem => item.Login)</td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Id)
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary mb-1">Editar</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger mb-1">Excluir</a>
                 </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nome)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Login)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+            </tr>
+        }
     </tbody>
 </table>

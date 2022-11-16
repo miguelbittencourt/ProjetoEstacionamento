@@ -1,4 +1,6 @@
-﻿using Estacionamento.Models;
+﻿using Estacionamento.Entidades;
+using Estacionamento.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -9,18 +11,22 @@ using System.Threading.Tasks;
 
 namespace Estacionamento.Controllers
 {
+    [Authorize(AuthenticationSchemes = "CookieAuthentication")]
     public class HomeController : Controller
     {
+        private readonly Contexto db;
+
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, Contexto contexto)
         {
             _logger = logger;
+            db = contexto;
         }
 
         public IActionResult Index()
         {
-            return View();
+            return RedirectToAction("Index", "Vagas");
         }
 
         public IActionResult Privacy()

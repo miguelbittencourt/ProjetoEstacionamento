@@ -6,9 +6,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Estacionamento.Entidades;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Estacionamento.Controllers
 {
+    [Authorize(AuthenticationSchemes = "CookieAuthentication")]
     public class UsuariosController : Controller
     {
         private readonly Contexto db;
@@ -22,31 +24,29 @@ namespace Estacionamento.Controllers
         // GET: UsuariosController
         public ActionResult Index(string query, string tipoPesquisa)
         {
-            if (string.IsNullOrEmpty(query))
+            switch (tipoPesquisa)
             {
-                return View(db.USUARIOS.ToList());
+                case "Nome":
+                    return View(db.USUARIOS.Where(a => a.Nome.Contains(query)));
+                case "Login":
+                    return View(db.USUARIOS.Where(a => a.Login.Contains(query)));
+                case "Todos":
+                    return View(db.USUARIOS.Where(a => a.Nome.Contains(query) || a.Login.Contains(query)));
+                default:
+                    return View(db.USUARIOS.ToList());
             }
-            else if(tipoPesquisa == "Todos")
-            {
-                return View(db.USUARIOS.Where(a => a.Login.Contains(query) || a.Nome.Contains(query) ));
-            }else if (tipoPesquisa == "Nome")
-            {
-                return View(db.USUARIOS.Where(a => a.Nome.Contains(query)));
-            }else if(tipoPesquisa == "Login")
-            {
-                return View(db.USUARIOS.Where(a => a.Login.Contains(query)));
-            }
-            else
-            {
-                return View(db.USUARIOS.ToList());
-            }
-            
         }
 
-        // GET: UsuariosController/Details/5
-        public ActionResult Details(int id)
+        public ActionResult RemoverFiltros()
         {
-            return View();
+            return RedirectToAction("Index", "Usuarios");
+        }
+
+        public ActionResult Delete(int id)
+        {
+            db.USUARIOS.Remove(db.USUARIOS.Where(a => a.Id == id).FirstOrDefault());
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         // GET: UsuariosController/Create
@@ -94,14 +94,5 @@ namespace Estacionamento.Controllers
                 return View();
             }
         }
-
-        public ActionResult Delete(int id)
-        {
-            db.USUARIOS.Remove(db.USUARIOS.Where(a => a.Id == id).FirstOrDefault());
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
-
     }
 }
