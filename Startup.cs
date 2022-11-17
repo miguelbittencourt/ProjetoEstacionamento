@@ -23,10 +23,14 @@ namespace Estacionamento
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            //services
+            //    .AddDbContext<Contexto>(options =>
+            //        options.UseMySQL(Configuration.GetConnectionString(
+            //            ApplicationConstants.Database.ApplicationConnectionParameterName)));
             services
                 .AddDbContext<Contexto>(options =>
-                    options.UseMySQL(Configuration.GetConnectionString(
-                        ApplicationConstants.Database.ApplicationConnectionParameterName)));
+                options.UseSqlServer(Configuration.GetConnectionString(
+                    ApplicationConstants.Database.ApplicationConnectionParameterName)));
             services.AddAuthentication("CookieAuthentication").AddCookie("CookieAuthentication", option =>
             {
                 option.LoginPath = "/Login/Index";

@@ -4,7 +4,7 @@
     {
         public sealed class Database
         {
-            public const string ApplicationConnectionParameterName = "DefaultConnection";
+            public const string ApplicationConnectionParameterName = "SqlServerConnection";
             public const string DefaultDatabaseSchema = "BancoEstacionamento";
         }
     }

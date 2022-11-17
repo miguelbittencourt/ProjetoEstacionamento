@@ -1,10 +1,9 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
-using MySql.EntityFrameworkCore.Metadata;
 
 namespace Estacionamento.Migrations
 {
-    public partial class migracaoInicial : Migration
+    public partial class migrateSqlServer : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,10 +12,10 @@ namespace Estacionamento.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    Nome = table.Column<string>(type: "text", nullable: true),
-                    Login = table.Column<string>(type: "text", nullable: true),
-                    Senha = table.Column<string>(type: "text", nullable: true)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nome = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Login = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Senha = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -28,17 +27,15 @@ namespace Estacionamento.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    TipoVeiculo = table.Column<string>(type: "text", nullable: true),
-                    Observacao = table.Column<string>(type: "text", nullable: true),
-                    Marca = table.Column<string>(type: "text", nullable: true),
-                    Modelo = table.Column<string>(type: "text", nullable: true),
-                    Cor = table.Column<string>(type: "text", nullable: true),
-                    Placa = table.Column<string>(type: "text", nullable: true),
-                    NomeProprietario = table.Column<string>(type: "text", nullable: true),
-                    Contato = table.Column<string>(type: "text", nullable: true),
-                    Chegada = table.Column<DateTime>(type: "datetime", nullable: false),
-                    Saida = table.Column<DateTime>(type: "datetime", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TipoVeiculo = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Observacao = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Marca = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Modelo = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Cor = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Placa = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NomeProprietario = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Contato = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -50,10 +47,12 @@ namespace Estacionamento.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    Sigla = table.Column<string>(type: "text", nullable: true),
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Sigla = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     VeiculoId = table.Column<int>(type: "int", nullable: true),
-                    Status = table.Column<string>(type: "text", nullable: true)
+                    Chegada = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Saida = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Status = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
